@@ -1,0 +1,13 @@
+name: Dogfood
+on:
+  pull_request:
+permissions:
+  pull-requests: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+        with:
+          openrouter-api-key: ${{ secrets.OPENROUTER_API_KEY }}
