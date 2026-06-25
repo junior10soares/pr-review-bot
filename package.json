@@ -4,6 +4,7 @@
   "description": "GitHub Action que revisa Pull Requests usando um LLM",
   "type": "module",
   "scripts": {
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
@@ -15,7 +16,9 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^26.0.1",
-    "typescript": "^6.0.3"
+    "eslint": "^10.5.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.0"
   },
   "dependencies": {
     "@actions/core": "^3.0.1",
