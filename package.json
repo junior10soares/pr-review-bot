@@ -6,11 +6,18 @@
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
-  "keywords": ["github-action", "llm", "code-review"],
+  "keywords": [
+    "github-action",
+    "llm",
+    "code-review"
+  ],
   "author": "Junior Soares",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^26.0.1",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@octokit/rest": "^22.0.1"
   }
 }
