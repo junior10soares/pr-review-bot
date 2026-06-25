@@ -13,16 +13,26 @@ function formatDiff(files: PullRequestFile[]): string {
     .join("\n\n");
 }
 
-export async function reviewDiff(files: PullRequestFile[], apiKey: string): Promise<string> {
-  const model = new ChatOpenAI({
-    apiKey,
-    // ponytail: modelos free da OpenRouter mudam/saem do ar sem aviso — troque via OPENROUTER_MODEL se este parar de funcionar
-    model: process.env.OPENROUTER_MODEL ?? "cohere/north-mini-code:free",
-    temperature: 0.2,
-    configuration: { baseURL: "https://openrouter.ai/api/v1" },
-  });
+export interface ReviewModel {
+  invoke(messages: { role: string; content: string }[]): Promise<{ content: unknown }>;
+}
 
-  const response = await model.invoke([
+export async function reviewDiff(
+  files: PullRequestFile[],
+  apiKey: string,
+  model?: ReviewModel,
+): Promise<string> {
+  const chatModel =
+    model ??
+    new ChatOpenAI({
+      apiKey,
+      // ponytail: modelos free da OpenRouter mudam/saem do ar sem aviso — troque via OPENROUTER_MODEL se este parar de funcionar
+      model: process.env.OPENROUTER_MODEL ?? "cohere/north-mini-code:free",
+      temperature: 0.2,
+      configuration: { baseURL: "https://openrouter.ai/api/v1" },
+    });
+
+  const response = await chatModel.invoke([
     { role: "system", content: SYSTEM_PROMPT },
     { role: "user", content: formatDiff(files) },
   ]);
