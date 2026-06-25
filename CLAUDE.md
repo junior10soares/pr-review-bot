@@ -65,6 +65,8 @@ Histórico de fases (commits no repo, todas concluídas):
 - [x] **Fase 4** — CI (lint, typecheck, test)
 - [x] **Fase 5** — testes unitários de `review.ts` (model injetável, sem chamar API real)
 - [x] **Fase 6** — LICENSE, README, `gh repo create` + push, branch protection, tag `v1`, correção do bundle (`esbuild` + `dist/index.js` commitado)
-- [ ] **Fase 7** — dogfooding: referenciar a Action (`uses: junior10soares/pr-review-bot@v1`) em outros repos
+- [x] **Fase 7 (parcial)** — `.github/workflows/dogfood.yml`: a Action revisa os próprios PRs deste repo (`uses: ./`). Testado de ponta a ponta no PR #2 — postou um review real e útil. Tag `v1` foi movida pra apontar pro commit com o bundle corrigido (a primeira versão da tag tinha sido criada antes da correção e estava quebrada pra uso externo).
+
+Falta: referenciar `uses: junior10soares/pr-review-bot@v1` nos OUTROS repos do plano mestre (`medical-appointment-template`, `portfolio-ia`) — esses repos ainda não existem/foram tocados.
 
 Mudanças futuras: ao terminar algo testável, descreva como testá-lo manualmente antes de seguir.
