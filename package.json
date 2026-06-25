@@ -1,0 +1,16 @@
+{
+  "name": "pr-review-bot",
+  "version": "0.1.0",
+  "description": "GitHub Action que revisa Pull Requests usando um LLM",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["github-action", "llm", "code-review"],
+  "author": "Junior Soares",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "typescript": "^6.0.3"
+  }
+}
