@@ -16,3 +16,5 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+      - run: npm run build
+      - run: git diff --exit-code dist/ || (echo "dist/ desatualizado, rode 'npm run build' e commit" && exit 1)

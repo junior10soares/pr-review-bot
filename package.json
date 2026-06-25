@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --test tests/**/*.test.ts"
+    "test": "node --test tests/**/*.test.ts",
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node24 --format=esm --banner:js=\"import { createRequire as __cr } from 'module'; const require = __cr(import.meta.url);\" --outfile=dist/index.js"
   },
   "keywords": [
     "github-action",
@@ -17,6 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^26.0.1",
+    "esbuild": "^0.28.1",
     "eslint": "^10.5.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.62.0"
