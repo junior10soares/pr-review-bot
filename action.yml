@@ -1,0 +1,13 @@
+name: "PR Review Bot"
+description: "Revisa Pull Requests usando um LLM via OpenRouter"
+inputs:
+  github-token:
+    description: "Token usado para ler o diff e postar o review"
+    required: false
+    default: ${{ github.token }}
+  openrouter-api-key:
+    description: "API key da OpenRouter"
+    required: true
+runs:
+  using: "node24"
+  main: "src/index.ts"

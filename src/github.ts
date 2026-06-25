@@ -1,6 +1,9 @@
 import { fileURLToPath } from "node:url";
 import { Octokit } from "@octokit/rest";
 
+// estrutural: aceita tanto @octokit/rest quanto o client de @actions/github.getOctokit(), que só expõe .rest/.paginate
+export type GitHubClient = Pick<Octokit, "rest" | "paginate">;
+
 export interface PullRequestFile {
   filename: string;
   status: string;
@@ -10,7 +13,7 @@ export interface PullRequestFile {
 }
 
 export async function getPullRequestDiff(
-  octokit: Octokit,
+  octokit: GitHubClient,
   owner: string,
   repo: string,
   pullNumber: number,
@@ -29,6 +32,22 @@ export async function getPullRequestDiff(
     deletions,
     patch,
   }));
+}
+
+export async function postReviewComment(
+  octokit: GitHubClient,
+  owner: string,
+  repo: string,
+  pullNumber: number,
+  body: string,
+): Promise<void> {
+  await octokit.rest.pulls.createReview({
+    owner,
+    repo,
+    pull_number: pullNumber,
+    body,
+    event: "COMMENT",
+  });
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

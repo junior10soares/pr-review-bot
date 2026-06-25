@@ -18,6 +18,8 @@
     "typescript": "^6.0.3"
   },
   "dependencies": {
+    "@actions/core": "^3.0.1",
+    "@actions/github": "^9.1.1",
     "@langchain/core": "^1.2.1",
     "@langchain/openai": "^1.5.3",
     "@octokit/rest": "^22.0.1"

@@ -13,9 +13,9 @@ function formatDiff(files: PullRequestFile[]): string {
     .join("\n\n");
 }
 
-export async function reviewDiff(files: PullRequestFile[]): Promise<string> {
+export async function reviewDiff(files: PullRequestFile[], apiKey: string): Promise<string> {
   const model = new ChatOpenAI({
-    apiKey: process.env.OPENROUTER_API_KEY,
+    apiKey,
     // ponytail: modelos free da OpenRouter mudam/saem do ar sem aviso — troque via OPENROUTER_MODEL se este parar de funcionar
     model: process.env.OPENROUTER_MODEL ?? "cohere/north-mini-code:free",
     temperature: 0.2,
@@ -31,7 +31,8 @@ export async function reviewDiff(files: PullRequestFile[]): Promise<string> {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  console.assert(process.env.OPENROUTER_API_KEY, "OPENROUTER_API_KEY não está definida");
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  console.assert(apiKey, "OPENROUTER_API_KEY não está definida");
 
   const sampleDiff: PullRequestFile[] = [
     {
@@ -43,6 +44,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     },
   ];
 
-  const review = await reviewDiff(sampleDiff);
+  const review = await reviewDiff(sampleDiff, apiKey!);
   console.log(review);
 }
